@@ -1,32 +1,43 @@
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import './Sidebar.scss';
 
-import CalcButton from '../ui-kit/CalcButton';
 import SidebarItem from './SidebarItem';
-import Display from './Display';
+import { constructorItems } from '../../const/const';
 
 function Sidebar() {
-  const operators = ['/', 'x', '-', '+'];
-  const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ','];
-
   return (
-    <ul className="sidebar">
-      <SidebarItem>
-        <Display value="0" />
-      </SidebarItem>
-      <SidebarItem>
-        {operators.map((operator) => (
-          <CalcButton key={operator} symbol={operator} type="operator" />
-        ))}
-      </SidebarItem>
-      <SidebarItem>
-        {digits.map((digit) => (
-          <CalcButton key={digit} symbol={digit} type="digit" />
-        ))}
-      </SidebarItem>
-      <SidebarItem>
-        <CalcButton symbol="=" type="equals" />
-      </SidebarItem>
-    </ul>
+    <Droppable droppableId="sidebar" isDropDisabled>
+      {(provided) => (
+        <ul {...provided.droppableProps} ref={provided.innerRef} className="sidebar">
+          {constructorItems.map((item, index) => (
+            <Draggable key={item} draggableId={item} index={index}>
+              {(providedItem, snapshotItem) => (
+                <>
+                  <SidebarItem
+                    provided={providedItem}
+                    type={item}
+                    style={null}
+                  />
+                  {/* {snapshotItem.isDragging && (
+                    <SidebarItem
+                      provided={null}
+                      style={{ transform: 'none !important' }}
+                      type={item}
+                    />
+                  )} */}
+                </>
+              )}
+            </Draggable>
+          ))}
+          {provided.placeholder}
+        </ul>
+      )}
+    </Droppable>
+    // <ul className="sidebar">
+    //   {constructorItems.map((item, index) => (
+    //     <SidebarItem key={item} index={index} type={item} />
+    //   ))}
+    // </ul>
   );
 }
 

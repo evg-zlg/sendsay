@@ -10,8 +10,12 @@ function CalcButton({ symbol, type }: CalcButtonProps) {
   if (symbol === '0') {
     className += ' calc-button--is-zero';
   }
+
   return (
-    <button type="button" className={className}>
+    <button
+      type="button"
+      className={className}
+    >
       {symbol}
     </button>
   );

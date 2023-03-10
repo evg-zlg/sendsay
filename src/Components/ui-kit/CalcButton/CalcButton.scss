@@ -11,6 +11,9 @@
   font-size: 14px;
   line-height: 15px;
 
+  user-select: none;
+  pointer-events: none;
+
   &--operator {
     width: 52px;
   }
