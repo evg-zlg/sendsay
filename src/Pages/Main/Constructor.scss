@@ -1,0 +1,30 @@
+.constructor {
+  margin: auto auto;
+  width: 539px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  align-items: center;
+  justify-content: center;
+
+  &__toggle {
+    margin: 0 0 0 auto;
+  }
+
+  &__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__sidebar {
+    width: 240px;
+  }
+
+  &__canvas {
+    width: 243px;
+    height: 516px;
+  }
+}

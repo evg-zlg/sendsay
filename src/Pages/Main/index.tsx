@@ -1,3 +1,3 @@
-import Main from './Main';
+import Constructor from './Constructor';
 
-export default Main;
+export default Constructor;

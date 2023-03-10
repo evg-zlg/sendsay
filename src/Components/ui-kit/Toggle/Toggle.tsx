@@ -29,7 +29,7 @@ function Toggle() {
         name="toggle"
         id="toggle-runtime"
         onClick={handleClickInput}
-        checked={runtimeMode}
+        defaultChecked={runtimeMode}
       />
       <label
         className={`${ClassNameLabel.Default} ${ClassNameLabel.Runtime} ${
@@ -46,7 +46,7 @@ function Toggle() {
         type="radio"
         name="toggle"
         id="toggle-constructor"
-        checked={!runtimeMode}
+        defaultChecked={!runtimeMode}
         onClick={handleClickInput}
       />
       <label

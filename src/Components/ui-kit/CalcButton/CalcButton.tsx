@@ -6,8 +6,12 @@ type CalcButtonProps = {
 };
 
 function CalcButton({ symbol, type }: CalcButtonProps) {
+  let className = `calc-button calc-button--${type}`;
+  if (symbol === '0') {
+    className += ' calc-button--is-zero';
+  }
   return (
-    <button type="button" className={`calc-button calc-button--${type}`}>
+    <button type="button" className={className}>
       {symbol}
     </button>
   );

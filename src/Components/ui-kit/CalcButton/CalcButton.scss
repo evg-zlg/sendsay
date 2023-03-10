@@ -18,7 +18,11 @@
   &--digit {
     width: 72px;
   }
-  
+
+  &--is-zero {
+    width: 152px;
+  }
+
   &--operator,
   &--digit {
     &:active {
