@@ -7,17 +7,17 @@ import Display from './Display';
 type SidebarItemProps = {
   type: string;
   provided: DraggableProvided | null;
-  style: CSSProperties | null;
+  // style: CSSProperties | null;
 };
 
-function SidebarItem({ type, provided, style }: SidebarItemProps) {
+function SidebarItem({ type, provided }: SidebarItemProps) {
   return (
     <li
       ref={provided?.innerRef}
       {...provided?.draggableProps}
       {...provided?.dragHandleProps}
       className="sidebar-item"
-      style={style || provided?.draggableProps.style}
+      // style={provided?.draggableProps.style}
     >
       {type === 'display' && <Display value="0" />}
       {type === 'operators' &&

@@ -16,15 +16,15 @@ function Sidebar() {
                   <SidebarItem
                     provided={providedItem}
                     type={item}
-                    style={null}
+                    // style={null}
                   />
-                  {/* {snapshotItem.isDragging && (
+                  {snapshotItem.isDragging && (
                     <SidebarItem
                       provided={null}
-                      style={{ transform: 'none !important' }}
                       type={item}
+                      // style={{ transform: 'none' }}
                     />
-                  )} */}
+                  )}
                 </>
               )}
             </Draggable>
