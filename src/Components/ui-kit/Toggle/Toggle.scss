@@ -1,0 +1,53 @@
+@import '../../../scss/colors.scss';
+
+.toggle {
+  width: 243px;
+  height: 38px;
+  padding: 0 1px;
+  border-radius: 6px;
+  background-color: $bgLightColor;
+  color: $secondColor;
+  font-size: 14px;
+  font-weight: 500;
+
+  display: flex;
+  align-self: center;
+  // justify-content: space-around;
+
+  &__label {
+    margin: auto auto;
+    display: flex;
+    align-items: center;
+    height: 36px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 0 0 0 12px;
+    cursor: pointer;
+    transition: all 0.2s ease 0s;
+
+    &--active {
+      border: 1px solid $borderButtonColor;
+      background-color: $whiteColor;
+    }
+
+    &--runtime {
+      width: 108px;
+    }
+    &--constructor {
+      width: 133px;
+    }
+  }
+
+  &__input {
+    appearance: none;
+  }
+}
+
+.icon {
+  stroke: $lightColor;
+  margin: 0 10px 0 0;
+
+  &--active {
+    stroke: $accentColor;
+  }
+}

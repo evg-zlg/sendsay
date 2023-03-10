@@ -1,0 +1,34 @@
+@import '../../../scss/colors.scss';
+
+.calc-button {
+  height: 48px;
+  background-color: $whiteColor;
+  color: $mainColor;
+  border: 1px solid $borderButtonColor;
+  border-radius: 6px;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 15px;
+
+  &--operator {
+    width: 52px;
+  }
+
+  &--digit {
+    width: 72px;
+  }
+  
+  &--operator,
+  &--digit {
+    &:active {
+      border: 2px solid $accentColor;
+    }
+  }
+  &--equals {
+    width: 232px;
+    height: 64px;
+    background-color: $accentColor;
+    color: $whiteColor;
+  }
+}
