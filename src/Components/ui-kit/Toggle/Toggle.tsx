@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import './Toggle.scss';
 import IconEye from './IconEye';
 import IconSelector from './IconSelector';
@@ -26,9 +25,6 @@ function Toggle() {
     dispatcher(changeConstructorMode( !isConstructor));
   };
 
-  useEffect(() => {
-    console.log(isConstructor);
-  }, [isConstructor]);
   return (
     <div className="toggle">
       <input

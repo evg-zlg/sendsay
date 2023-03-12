@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { canvasState } from './reducers/canvasSlice';
 import { constructorState } from './reducers/constructorSlice';
 
 
 export const rootReducer = combineReducers({
   'constructorMode': constructorState,
+  'canvasState': canvasState,
 });
 
 const setupStore = () =>
