@@ -1,4 +1,5 @@
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import Canvas from '../../Components/Canvas';
 import Sidebar from '../../Components/Sidebar';
 import Toggle from '../../Components/ui-kit/Toggle';
@@ -6,24 +7,20 @@ import './Constructor.scss';
 
 function Constructor() {
 
-  const handleDragEnd = () => {
-    console.log('drag end')
-  };
-
   return (
     <main className="constructor">
       <header className="constructor__toggle">
         <Toggle />
       </header>
       <div className="constructor__container">
-        <DragDropContext onDragEnd={handleDragEnd}>
+        <DndProvider backend={HTML5Backend}>
           <aside className="constructor__sidebar">
             <Sidebar />
           </aside>
           <div className="constructor__canvas">
             <Canvas />
           </div>
-        </DragDropContext>
+        </DndProvider>
       </div>
     </main>
   );

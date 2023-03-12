@@ -1,7 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { constructorState } from './reducers/constructorSlice';
 
 
 export const rootReducer = combineReducers({
+  'constructorMode': constructorState,
 });
 
 const setupStore = () =>

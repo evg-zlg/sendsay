@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import './Toggle.scss';
 import IconEye from './IconEye';
 import IconSelector from './IconSelector';
+
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { changeConstructorMode } from '../../../store/reducers/constructorSlice';
 
 enum InputLabel {
   Runtime = 'Runtime',
@@ -16,11 +19,16 @@ enum ClassNameLabel {
 }
 
 function Toggle() {
-  const [runtimeMode, setRuntimeMode] = useState(false);
+  const dispatcher = useAppDispatch();
+  const { isConstructor } = useAppSelector((state) => state.constructorMode);
 
   const handleClickInput = () => {
-    setRuntimeMode((prev) => !prev);
+    dispatcher(changeConstructorMode( !isConstructor));
   };
+
+  useEffect(() => {
+    console.log(isConstructor);
+  }, [isConstructor]);
   return (
     <div className="toggle">
       <input
@@ -29,15 +37,15 @@ function Toggle() {
         name="toggle"
         id="toggle-runtime"
         onClick={handleClickInput}
-        defaultChecked={runtimeMode}
+        defaultChecked={!isConstructor}
       />
       <label
         className={`${ClassNameLabel.Default} ${ClassNameLabel.Runtime} ${
-          runtimeMode ? ClassNameLabel.Active : ''
+          !isConstructor ? ClassNameLabel.Active : ''
         }`}
         htmlFor="toggle-runtime"
       >
-        <IconEye active={runtimeMode} />
+        <IconEye active={!isConstructor} />
         {InputLabel.Runtime}
       </label>
 
@@ -46,16 +54,16 @@ function Toggle() {
         type="radio"
         name="toggle"
         id="toggle-constructor"
-        defaultChecked={!runtimeMode}
+        defaultChecked={isConstructor}
         onClick={handleClickInput}
       />
       <label
         className={`${ClassNameLabel.Default} ${ClassNameLabel.Constructor} ${
-          runtimeMode ? '' : ClassNameLabel.Active
+          !isConstructor ? '' : ClassNameLabel.Active
         }`}
         htmlFor="toggle-constructor"
       >
-        <IconSelector active={!runtimeMode} />
+        <IconSelector active={isConstructor} />
         {InputLabel.Constructor}
       </label>
     </div>

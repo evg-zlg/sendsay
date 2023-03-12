@@ -1,23 +1,30 @@
-import { CSSProperties } from 'react';
-import { DraggableProvided } from 'react-beautiful-dnd';
-import { operators, digits } from '../../const/const';
+import { useDrag } from 'react-dnd'
+import { operators, digits, ItemType } from '../../const/const';
 import CalcButton from '../ui-kit/CalcButton';
 import Display from './Display';
 
 type SidebarItemProps = {
   type: string;
-  provided: DraggableProvided | null;
-  // style: CSSProperties | null;
 };
 
-function SidebarItem({ type, provided }: SidebarItemProps) {
+function SidebarItem({ type }: SidebarItemProps) {
+  const [ {isDragging}, dragRef] = useDrag(
+    () => ({
+      type: ItemType.SIDEBAR,
+      collect: (monitor) => ({
+        isDragging: !!monitor.isDragging(),
+      })
+    }),
+    []
+  )
   return (
     <li
-      ref={provided?.innerRef}
-      {...provided?.draggableProps}
-      {...provided?.dragHandleProps}
       className="sidebar-item"
-      // style={provided?.draggableProps.style}
+      ref={dragRef}
+      style={{
+        opacity: 1,
+        cursor: 'move',
+      }}
     >
       {type === 'display' && <Display value="0" />}
       {type === 'operators' &&
