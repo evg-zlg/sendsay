@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TItem } from '../../types/types';
+import { TConstructorItem } from '../../types/types';
 
 type initialStateProps = {
-  canvasItems: TItem[];
+  canvasItems: TConstructorItem[];
 };
 const initialState: initialStateProps = {
   canvasItems: [],
@@ -12,10 +12,10 @@ export const canvasSlice = createSlice({
   name: 'canvas',
   initialState,
   reducers: {
-    addItemInCanvas(state, actions: PayloadAction<TItem>) {
+    addItemInCanvas(state, actions: PayloadAction<TConstructorItem>) {
       state.canvasItems.push(actions.payload);
     },
-    updateItemsCanvas(state, actions: PayloadAction<{ item: TItem; position: number }>) {
+    updateItemsCanvas(state, actions: PayloadAction<{ item: TConstructorItem; position: number }>) {
       // state.canvasItems
     },
   },

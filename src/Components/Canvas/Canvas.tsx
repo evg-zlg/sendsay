@@ -1,8 +1,8 @@
 import { useDrop } from 'react-dnd/dist/hooks';
 import { ItemType } from '../../const/const';
-import SidebarItem from '../Sidebar/SidebarItem';
 import './Canvas.scss';
 import IconDrop from './IconDrop';
+import ConstructorItem from '../ConstructorItem';
 
 import { useAppSelector } from '../../hooks/redux';
 
@@ -32,7 +32,7 @@ function Canvas() {
         </div>
       )}
       {canvasItems.length > 0 && canvasItems.map((item) => (
-        <SidebarItem key={item} type={item} />
+        <ConstructorItem key={item.type} constructorItem={item} />
       ))}
     </div>
   );

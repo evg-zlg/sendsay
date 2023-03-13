@@ -19,7 +19,7 @@ enum ClassNameLabel {
 
 function Toggle() {
   const dispatcher = useAppDispatch();
-  const { isConstructor } = useAppSelector((state) => state.constructorMode);
+  const { isConstructor } = useAppSelector((state) => state.constructorState);
 
   const handleClickInput = () => {
     dispatcher(changeConstructorMode( !isConstructor));
