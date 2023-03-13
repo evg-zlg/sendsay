@@ -7,7 +7,7 @@ import CalcButton from '../ui-kit/CalcButton';
 import Display from './Display';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
-import { updateItemsSidebar } from '../../store/reducers/sidebarSlice';
+import { disableMoveItemSidebar } from '../../store/reducers/sidebarSlice';
 import { TConstructorItem } from '../../types/types';
 
 type ConstructorItemProps = {
@@ -18,25 +18,8 @@ function ConstructorItem({ constructorItem }: ConstructorItemProps) {
   const { sidebarItems: sidebarItemsFromStore } = useAppSelector((state) => state.sidebarState);
   const dispatcher = useAppDispatch();
 
-  useEffect(() => {
-    console.log('sidebarItemsFromStore', sidebarItemsFromStore)
-
-  }, [constructorItem]);
-  const disableMoveThisItem = () => {
-    console.log('disable', constructorItem.type)
-    dispatcher(
-      updateItemsSidebar(
-        sidebarItemsFromStore.map((item) => {
-          if (item.type === constructorItem.type) {
-            return {
-              ...constructorItem,
-              canMove: false,
-            };
-          }
-          return item;
-        }),
-      ),
-    );
+  function disableMoveThisItem() {
+    dispatcher(disableMoveItemSidebar(constructorItem));
   };
 
   const [{ isDragging }, dragRef] = useDrag(
@@ -55,6 +38,7 @@ function ConstructorItem({ constructorItem }: ConstructorItemProps) {
     }),
     [],
   );
+
   return (
     <li
       className="constructor-item"

@@ -13,12 +13,23 @@ export const sidebarSlice = createSlice({
   name: 'sidebar',
   initialState,
   reducers: {
-    updateItemsSidebar(state, actions: PayloadAction<TConstructorItem[]>) {
-      state.sidebarItems = actions.payload;
+    updateItemsSidebar(state, action: PayloadAction<TConstructorItem[]>) {
+      state.sidebarItems = action.payload;
+    },
+    disableMoveItemSidebar(state, action: PayloadAction<TConstructorItem>) {
+      state.sidebarItems = state.sidebarItems.map((item) => {
+        if (item.type === action.payload.type) {
+          return {
+            ...item,
+            canMove: false,
+          };
+        }
+        return item;
+      });
     },
   },
 });
 
-export const { updateItemsSidebar } = sidebarSlice.actions;
+export const { updateItemsSidebar, disableMoveItemSidebar } = sidebarSlice.actions;
 
 export const sidebarState = sidebarSlice.reducer;
