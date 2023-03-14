@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd/dist/hooks';
 import { ItemType } from '../../const/const';
 import './Canvas.scss';
@@ -12,14 +13,20 @@ import CanvasItem from './CanvasItem';
 function Canvas() {
   const { canvasItems: canvasItemsFromStore } = useAppSelector((state) => state.canvasState);
   const dispatcher = useAppDispatch();
+  const [lastOverItem, setLastOverItem] = useState<TConstructorItem | null>(null);
+  const [showDnDZone, setShowDnDZone] = useState(false);
+
+  // useEffect(() => {
+  //   console.log('lastOverItem', lastOverItem);
+  // }, [lastOverItem]);
 
   const dropItemFromSidebar = (item: TConstructorItem) => {
     dispatcher(addItemInCanvas(item));
   };
 
-  function dropItemFromCanvas(item: TConstructorItem) {
+  const dropItemFromCanvas = (item: TConstructorItem) => {
     // dispatcher
-  }
+  };
 
   const [{ isOver }, drop] = useDrop(() => ({
     accept: [ItemType.SIDEBAR, ItemType.CANVAS],
@@ -38,12 +45,21 @@ function Canvas() {
       }
     },
     hover: (item, monitor) => {
-      // console.log(monitor.getClientOffset());
+      if (monitor.isOver()) {
+        setShowDnDZone(true);
+      }
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
   }));
+
+  useEffect(() => {
+    if (!isOver) {
+      setShowDnDZone(false);
+      setLastOverItem(null);
+    }
+  }, [isOver]);
 
   return (
     <div className="canvas" ref={drop}>
@@ -56,8 +72,14 @@ function Canvas() {
       )}
       {canvasItemsFromStore.length > 0 &&
         canvasItemsFromStore.map((item) => (
-          <CanvasItem key={item.type} constructorItem={item}>
-            <ConstructorItem constructorItem={item} />
+          <CanvasItem
+            key={item.type}
+            constructorItem={item}
+            setLastOverItem={setLastOverItem}
+            showDnDZone={canvasItemsFromStore.length > 0 && showDnDZone}
+            // typeItemDnDZone={}
+          >
+            <ConstructorItem typeItem={item.type} />
           </CanvasItem>
         ))}
     </div>

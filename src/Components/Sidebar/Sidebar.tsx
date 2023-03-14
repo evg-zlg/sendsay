@@ -10,7 +10,7 @@ function Sidebar() {
     <ul className="sidebar">
       {sidebarItems.map((item) => (
         <SidebarItem key={item.type} constructorItem={item}>
-          <ConstructorItem constructorItem={item} />
+          <ConstructorItem typeItem={item.type} />
         </SidebarItem>
       ))}
     </ul>

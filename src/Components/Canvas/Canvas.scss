@@ -3,6 +3,7 @@
 .canvas {
   width: 243px;
   height: 448px;
+  position: relative;
 
   &__invite {
     width: 100%;
@@ -35,6 +36,35 @@
       line-height: 17px;
       color: $accentColor;
       margin: 12px 0 0 0;
+    }
+  }
+  
+}
+.canvas-item {
+  position: relative;
+
+  &__dnd-zone {
+    width: 244px;
+    height: 2px;
+    position: absolute;
+
+    background-color: $accentColor;
+
+    &::after,
+    &::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      position: absolute;
+      top: -1.5px;
+      transform: rotate(45deg);
+      background-color: inherit;
+    }
+    &::after {
+      left: 0;
+    }
+    &::before {
+      right: 0;
     }
   }
 }

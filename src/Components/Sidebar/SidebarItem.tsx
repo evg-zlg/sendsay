@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, CSSProperties } from 'react';
 import { useDrag } from 'react-dnd';
 import { ItemType } from '../../const/const';
 import { useAppDispatch } from '../../hooks/redux';
@@ -33,7 +33,17 @@ function SidebarItem({ constructorItem, children }: SidebarItemProps) {
     }),
     [],
   );
-  return <div className="sidebar-item" ref={dragRef}>{children}</div>;
+  const styleSidebarItem: CSSProperties = {
+    opacity: constructorItem.canMove ? 1 : 0.5,
+    cursor: constructorItem.canMove ? 'move' : 'auto',
+    pointerEvents: constructorItem.canMove ? 'auto' : 'none',
+  };
+
+  return (
+    <div className="sidebar-item" ref={dragRef} style={styleSidebarItem}>
+      {children}
+    </div>
+  );
 }
 
 export default SidebarItem;
