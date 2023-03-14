@@ -1,12 +1,11 @@
 import './ConstructorItem.scss';
 
-import { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { operators, digits, ItemType } from '../../const/const';
 import CalcButton from '../ui-kit/CalcButton';
 import Display from './Display';
 
-import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
 import { disableMoveItemSidebar } from '../../store/reducers/sidebarSlice';
 import { TConstructorItem } from '../../types/types';
 
@@ -15,17 +14,16 @@ type ConstructorItemProps = {
 };
 
 function ConstructorItem({ constructorItem }: ConstructorItemProps) {
-  const { sidebarItems: sidebarItemsFromStore } = useAppSelector((state) => state.sidebarState);
   const dispatcher = useAppDispatch();
 
   function disableMoveThisItem() {
     dispatcher(disableMoveItemSidebar(constructorItem));
-  };
+  }
 
-  const [{ isDragging }, dragRef] = useDrag(
+  const [, dragRef] = useDrag(
     () => ({
       type: ItemType.SIDEBAR,
-      item: constructorItem.type,
+      item: constructorItem,
       end: (item, monitor) => {
         const dropResult = monitor.getDropResult();
         if (item && dropResult) {
