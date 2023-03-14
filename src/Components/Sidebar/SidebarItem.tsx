@@ -1,6 +1,4 @@
 import { ReactElement, CSSProperties } from 'react';
-import { useDrag } from 'react-dnd';
-import { ItemType } from '../../const/const';
 import { useAppDispatch } from '../../hooks/redux';
 import { disableMoveItemSidebar } from '../../store/reducers/sidebarSlice';
 import { TConstructorItem } from '../../types/types';
@@ -16,23 +14,7 @@ function SidebarItem({ constructorItem, children }: SidebarItemProps) {
   function disableMoveThisItem() {
     dispatcher(disableMoveItemSidebar(constructorItem));
   }
-  const [, dragRef] = useDrag(
-    () => ({
-      type: ItemType.SIDEBAR,
-      item: constructorItem,
-
-      end: (item, monitor) => {
-        const dropResult = monitor.getDropResult();
-        if (item && dropResult) {
-          disableMoveThisItem();
-        }
-      },
-      collect: (monitor) => ({
-        isDragging: !!monitor.isDragging(),
-      }),
-    }),
-    [],
-  );
+ 
   const styleSidebarItem: CSSProperties = {
     opacity: constructorItem.canMove ? 1 : 0.5,
     cursor: constructorItem.canMove ? 'move' : 'auto',
@@ -40,7 +22,7 @@ function SidebarItem({ constructorItem, children }: SidebarItemProps) {
   };
 
   return (
-    <div className="sidebar-item" ref={dragRef} style={styleSidebarItem}>
+    <div className="sidebar-item" style={styleSidebarItem}>
       {children}
     </div>
   );

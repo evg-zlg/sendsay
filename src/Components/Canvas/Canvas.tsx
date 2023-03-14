@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useDrop } from 'react-dnd/dist/hooks';
 import { ItemType } from '../../const/const';
 import './Canvas.scss';
 import IconDrop from './IconDrop';
@@ -16,10 +15,6 @@ function Canvas() {
   const [lastOverItem, setLastOverItem] = useState<TConstructorItem | null>(null);
   const [showDnDZone, setShowDnDZone] = useState(false);
 
-  // useEffect(() => {
-  //   console.log('lastOverItem', lastOverItem);
-  // }, [lastOverItem]);
-
   const dropItemFromSidebar = (item: TConstructorItem) => {
     dispatcher(addItemInCanvas(item));
   };
@@ -28,43 +23,10 @@ function Canvas() {
     // dispatcher
   };
 
-  const [{ isOver }, drop] = useDrop(() => ({
-    accept: [ItemType.SIDEBAR, ItemType.CANVAS],
-
-    canDrop: (item: TConstructorItem) => {
-      if (item.type === 'display' && canvasItemsFromStore.length > 0) {
-        return false;
-      }
-      return true;
-    },
-    drop: (item: TConstructorItem) => {
-      if (item.currentSource === 'sidebar') {
-        dropItemFromSidebar(item);
-      } else {
-        dropItemFromCanvas(item);
-      }
-    },
-    hover: (item, monitor) => {
-      if (monitor.isOver()) {
-        setShowDnDZone(true);
-      }
-    },
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-  }));
-
-  useEffect(() => {
-    if (!isOver) {
-      setShowDnDZone(false);
-      setLastOverItem(null);
-    }
-  }, [isOver]);
-
   return (
-    <div className="canvas" ref={drop}>
+    <div className="canvas" >
       {canvasItemsFromStore.length === 0 && (
-        <div className={`canvas__invite ${isOver ? 'canvas__invite--isOver' : ''}`}>
+        <div className={`canvas__invite  'canvas__invite--isOver' : ''}`}>
           <IconDrop />
           <p className="canvas__text canvas__text--accent">Перетащите сюда</p>
           <p className="canvas__text">{`любой элемент \n из левой панели`}</p>
@@ -76,8 +38,6 @@ function Canvas() {
             key={item.type}
             constructorItem={item}
             setLastOverItem={setLastOverItem}
-            showDnDZone={canvasItemsFromStore.length > 0 && showDnDZone}
-            // typeItemDnDZone={}
           >
             <ConstructorItem typeItem={item.type} />
           </CanvasItem>

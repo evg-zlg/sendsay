@@ -1,6 +1,5 @@
 import './ConstructorItem.scss';
 
-import { CSSProperties } from 'react';
 import { operators, digits } from '../../const/const';
 import CalcButton from '../ui-kit/CalcButton';
 import Display from './Display';
