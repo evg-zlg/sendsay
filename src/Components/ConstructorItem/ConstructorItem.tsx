@@ -1,12 +1,10 @@
 import './ConstructorItem.scss';
 
-import { useDrag } from 'react-dnd';
-import { operators, digits, ItemType } from '../../const/const';
+import { CSSProperties } from 'react';
+import { operators, digits } from '../../const/const';
 import CalcButton from '../ui-kit/CalcButton';
 import Display from './Display';
 
-import { useAppDispatch } from '../../hooks/redux';
-import { disableMoveItemSidebar } from '../../store/reducers/sidebarSlice';
 import { TConstructorItem } from '../../types/types';
 
 type ConstructorItemProps = {
@@ -14,39 +12,18 @@ type ConstructorItemProps = {
 };
 
 function ConstructorItem({ constructorItem }: ConstructorItemProps) {
-  const dispatcher = useAppDispatch();
 
-  function disableMoveThisItem() {
-    dispatcher(disableMoveItemSidebar(constructorItem));
-  }
-
-  const [, dragRef] = useDrag(
-    () => ({
-      type: ItemType.SIDEBAR,
-      item: constructorItem,
-      end: (item, monitor) => {
-        const dropResult = monitor.getDropResult();
-        if (item && dropResult) {
-          disableMoveThisItem();
-        }
-      },
-      collect: (monitor) => ({
-        isDragging: !!monitor.isDragging(),
-      }),
-    }),
-    [],
-  );
-
+  const styleConstructorItem: CSSProperties = {
+    opacity: constructorItem.canMove || constructorItem.currentSource === 'canvas' ? 1 : 0.5,
+    cursor: constructorItem.canMove ? 'move' : 'auto',
+    pointerEvents: constructorItem.canMove ? 'auto' : 'none',
+    boxShadow:
+      constructorItem.currentSource === 'sidebar'
+        ? '0px 2px 4px rgba(0, 0, 0, 0.06), 0px 4px 6px rgba(0, 0, 0, 0.1)'
+        : 'none',
+  };
   return (
-    <li
-      className="constructor-item"
-      ref={dragRef}
-      style={{
-        opacity: constructorItem.canMove ? 1 : 0.5,
-        cursor: constructorItem.canMove ? 'move' : 'auto',
-        pointerEvents: constructorItem.canMove ? 'auto' : 'none',
-      }}
-    >
+    <li className="constructor-item" style={styleConstructorItem}>
       {constructorItem.type === 'display' && <Display value="0" />}
       {constructorItem.type === 'operators' &&
         operators.map((operator) => (

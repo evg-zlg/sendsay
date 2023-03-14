@@ -13,7 +13,8 @@ export const canvasSlice = createSlice({
   initialState,
   reducers: {
     addItemInCanvas(state, actions: PayloadAction<TConstructorItem>) {
-      state.canvasItems.push(actions.payload);
+      const canMove = ! (actions.payload.type === 'display');
+      state.canvasItems.push({...actions.payload, currentSource: 'canvas', canMove});
     },
     updateItemsCanvas(state, actions: PayloadAction<{ item: TConstructorItem; position: number }>) {
       // state.canvasItems

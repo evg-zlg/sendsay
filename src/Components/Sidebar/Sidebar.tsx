@@ -2,13 +2,16 @@ import './Sidebar.scss';
 
 import { useAppSelector } from '../../hooks/redux';
 import ConstructorItem from '../ConstructorItem';
+import SidebarItem from './SidebarItem';
 
 function Sidebar() {
   const { sidebarItems } = useAppSelector((state) => state.sidebarState);
   return (
     <ul className="sidebar">
       {sidebarItems.map((item) => (
-        <ConstructorItem key={item.type} constructorItem={item} />
+        <SidebarItem key={item.type} constructorItem={item}>
+          <ConstructorItem constructorItem={item} />
+        </SidebarItem>
       ))}
     </ul>
   );
