@@ -2,15 +2,14 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { canvasState } from './reducers/canvasSlice';
 import { constructorState } from './reducers/constructorSlice';
 import { sidebarState } from './reducers/sidebarSlice';
+import { dndState } from './reducers/dndSlice';
 
 
 export const rootReducer = combineReducers({
   constructorState,
   sidebarState,
   canvasState,
-  // 'constructorMode': constructorState,
-  // 'sidebarState': sidebarState,
-  // 'canvasState': canvasState,
+  dndState,
 });
 
 const setupStore = () =>

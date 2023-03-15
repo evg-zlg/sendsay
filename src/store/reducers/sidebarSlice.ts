@@ -13,12 +13,12 @@ export const sidebarSlice = createSlice({
   name: 'sidebar',
   initialState,
   reducers: {
-    updateItemsSidebar(state, action: PayloadAction<TConstructorItem[]>) {
-      state.sidebarItems = action.payload;
+    updateItemsSidebar(state, actions: PayloadAction<TConstructorItem[]>) {
+      state.sidebarItems = actions.payload;
     },
-    disableMoveItemSidebar(state, action: PayloadAction<TConstructorItem>) {
+    disableMoveItemSidebar(state, actions: PayloadAction<TConstructorItem>) {
       state.sidebarItems = state.sidebarItems.map((item) => {
-        if (item.type === action.payload.type) {
+        if (item.type === actions.payload.type) {
           return {
             ...item,
             canMove: false,
@@ -27,9 +27,21 @@ export const sidebarSlice = createSlice({
         return item;
       });
     },
+    enebleItemInSidebar(state, actions: PayloadAction<TConstructorItem>) {
+      state.sidebarItems = state.sidebarItems.map((item) => {
+        if (item.type === actions.payload.type) {
+          return {
+            ...item,
+            canMove: true,
+          };
+        }
+        return item;
+      });
+    },
   },
 });
 
-export const { updateItemsSidebar, disableMoveItemSidebar } = sidebarSlice.actions;
+export const { updateItemsSidebar, disableMoveItemSidebar, enebleItemInSidebar } =
+  sidebarSlice.actions;
 
 export const sidebarState = sidebarSlice.reducer;
