@@ -1,4 +1,4 @@
-import { DragEvent, useState } from 'react';
+import { DragEvent, useState, MutableRefObject } from 'react';
 import './Canvas.scss';
 import IconDrop from './IconDrop';
 import ConstructorItem from '../ConstructorItem';
@@ -52,10 +52,11 @@ function Canvas() {
       )}
       {canvasItemsFromStore.length > 0 &&
         canvasItemsFromStore.map((item) => (
-          <CanvasItem key={item.type} constructorItem={item} setLastOverItem={setLastOverItem}>
-            <ConstructorItem typeItem={item.type} />
+          <CanvasItem key={item.constructorItem.type} constructorItem={item.constructorItem} setLastOverItem={setLastOverItem} >
+            <ConstructorItem typeItem={item.constructorItem.type} />
           </CanvasItem>
         ))}
+      {showDnDZone && canvasItemsFromStore.length > 0 && <div className="canvas__dnd-zone" />}
     </div>
   );
 }

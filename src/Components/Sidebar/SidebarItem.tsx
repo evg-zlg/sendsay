@@ -26,7 +26,7 @@ function SidebarItem({ constructorItem, children }: SidebarItemProps) {
     dispatcher(changeDragItem(constructorItem));
   };
 
-  const handleDragEnd = () => {
+  const handleDragEnd = (e: DragEvent<HTMLDivElement>) => {
     dispatcher(changeDragItem(null));
   }
 

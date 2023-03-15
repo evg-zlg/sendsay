@@ -38,10 +38,6 @@
       margin: 12px 0 0 0;
     }
   }
-  
-}
-.canvas-item {
-  position: relative;
 
   &__dnd-zone {
     width: 244px;
@@ -67,4 +63,7 @@
       right: 0;
     }
   }
+}
+.canvas-item {
+  position: relative;
 }

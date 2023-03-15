@@ -12,21 +12,21 @@ export const initialItemsSidebar: TConstructorItem[] = [
   {
     type: 'display',
     canMove: true,
-    currentSource: 'sidebar',
+    // currentSource: 'sidebar',
   },
   {
     type: 'operators',
     canMove: true,
-    currentSource: 'sidebar',
+    // currentSource: 'sidebar',
   },
   {
     type: 'digits',
     canMove: true,
-    currentSource: 'sidebar',
+    // currentSource: 'sidebar',
   },
   {
     type: 'equals',
     canMove: true,
-    currentSource: 'sidebar',
+    // currentSource: 'sidebar',
   },
 ];
